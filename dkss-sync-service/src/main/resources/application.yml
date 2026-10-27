@@ -1,0 +1,111 @@
+#端口
+server:
+  port: 8906
+
+spring:
+  datasource:
+    url: jdbc:mysql://mysql8:3306/xpros-boot?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: shine@321
+  profiles:
+    active: dev
+
+logging:
+  file:
+    name: logs/sync.log
+  level:
+    root: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %5level [%thread] %logger{36} - %msg%n"
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 30
+      total-size-cap: 1GB
+
+dubbo:
+  application:
+    name: xpros-computation # 应用名称
+    qos-enable: true
+    qos-port: 29600 # 自定义端口
+    qos-accept-foreign-ip: false
+    serialize-check-status: WARN
+    logger: slf4j
+  protocol:
+    name: dubbo # 协议
+    port: 19600 # 服务端口
+  registry:
+    address: nacos://nacos:8848 # 注册中心地址
+    parameters:
+      namespace: xpros # 命名空间
+    group: xpros
+    username: nacos # 如果开启认证
+    password: nacos
+    register-mode: instance
+  scan:
+    base-packages: com.shine # 扫描 Dubbo服务接口
+  consumer:
+    check: false  # 关闭消费者启动检查，防止服务提供者没启动导致消费者启动失败
+    timeout: 5000 # 全局消费者超时时间，单位毫秒
+  provider:
+    timeout: 5000 # 全局提供者超时时间，单位毫秒
+
+
+sync:
+  auditLog:
+    cron: "0 30 * * * *"
+    url: jdbc:kingbase8://192.168.17.148:54321/jpaas?sys_catalog&useSSL=false&lowerCaseTableNames=true&autoReconnect=true
+    username: system
+    password: Qaz123123
+    schema: jpaas_system
+    table: sys_log
+    field:
+      id: ID_
+      appName: APP_NAME_
+      module: MODULE_
+      subModule: SUB_MODULE_
+      action: ACTION_
+      operation: OPERATION_
+      detail: DETAIL_
+      userName: USER_NAME_
+      createBy: CREATE_BY_
+      createTime: CREATE_TIME_
+      ip: IP_
+      duration : DURATION_
+      result : OPERATION_RESULT_
+      securityLevel : SM_SEC_LEVEL_
+  login:
+    url: jdbc:kingbase8://192.168.17.148:54321/jpaas?sys_catalog&useSSL=false&lowerCaseTableNames=true&autoReconnect=true
+    username: system
+    password: Qaz123123
+    userSchema: jpaas_user
+    systemSchema: jpaas_system
+    userTable: os_user
+    userRelationTable: os_rel_inst
+    userGroupTable: os_group
+    groupMenuTable: os_group_menu
+    systemMenuTable: sys_menu
+    userKey: USER_NO_
+    defaultPass: 2025@Xpros
+    userField:
+      userId: USER_ID_
+      userNo: USER_NO_
+      email: EMAIL_
+      securityLevel: SM_SEC_LEVEL
+      name: FULLNAME_
+    userRelationFiled:
+      bindId: PARTY1_
+      userId: PARTY2_
+      dimension: DIM1_
+      realType: REL_TYPE_KEY_
+    userGroupFiled:
+      id: GROUP_ID_
+      name: NAME_
+      parentId: PARENT_ID_
+    roleMenuField:
+      menuId: MENU_ID_
+      roleId: GROUP_ID_
+      menuKey: MENU_KEY_
+    systemMenuField:
+      menuId: MENU_ID_
+      menuKey: MENU_KEY_

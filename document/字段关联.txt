@@ -1,0 +1,30 @@
+os_user与sys_user对应关系
+USER_NO_ third_id
+EMAIL_ email
+USER_CODE_ account
+SM_SEC_LEVEL_ secret_level
+FULLNAME_ name
+TENANT_ID_ third_id
+
+os_platform_audit_info与xp_user_operation_log
+APP_NAME_ fun_modules_name
+MODULE_ fun_modules_name
+SUB_MODULE_ fun_modules_name
+ACTON_ operation_type
+IP_ ip
+OPERATON_ behavior
+DETAIL_ behavior
+USER_NAME_ creator_name
+CREATE_BY creator_name
+CREATE_TIME_ create_time
+TENANT_ID user_third_id
+CREATE_DEP_ID dep_third_id
+PK_VALUE fun_modules_id
+OPERATE_ON_
+OPERATE_ON_SM_SEC_LEVEL_
+OPERATION_RESULT_ 成功
+
+备注：增加user_third_id、dep_third_id
+
+
+

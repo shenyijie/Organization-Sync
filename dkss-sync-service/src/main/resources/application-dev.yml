@@ -1,0 +1,37 @@
+#十所调试网 DOCKER部署 配置
+
+spring:
+  datasource:
+    url: jdbc:kingbase8://192.168.17.232:54321/xpros?currentSchema=xpros_boot,sys_catalog&useSSL=false&slowerCaseTableNames=true&autoReconnect=true
+    username: xpros
+    password: xpros
+    driver-class-name: com.kingbase8.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.Kingbase8Dialect
+    hibernate:
+      ddl-auto: update
+
+dubbo:
+  registry:
+    address: nacos://nacos:8848 # 注册中心地址
+
+sync:
+  auditLog:
+    url: jdbc:kingbase8://192.168.17.148:54321/jpaas?sys_catalog&useSSL=false&lowerCaseTableNames=true&autoReconnect=true
+    username: system
+    password: Qaz123123
+    schema: jpaas_system
+    table: sys_log
+  login:
+    url: jdbc:kingbase8://192.168.17.148:54321/jpaas?sys_catalog&useSSL=false&lowerCaseTableNames=true&autoReconnect=true
+    username: system
+    password: Qaz123123
+    userSchema: jpaas_user
+    systemSchema: jpaas_system
+    userTable: os_user
+    userRelationTable: os_rel_inst
+    userGroupTable: os_group
+    groupMenuTable: os_group_menu
+    systemMenuTable: sys_menu
+    userKey: USER_NO_
+    defaultPass: 2025@Xpros

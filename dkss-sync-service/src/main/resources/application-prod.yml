@@ -1,0 +1,34 @@
+#十所调试网 DOCKER部署 配置
+
+spring:
+  datasource:
+    url: jdbc:kingbase8://10.10.207.124:54321/xpros?currentSchema=xpros_boot,sys_catalog&useSSL=false&slowerCaseTableNames=true&autoReconnect=true
+    username: system
+    password: 12345678ab
+    driver-class-name: com.kingbase8.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.Kingbase8Dialect
+    hibernate:
+      ddl-auto: update
+
+dubbo:
+  registry:
+    address: nacos://localhost:8848 # 注册中心地址
+
+sync:
+  auditLog:
+    url: jdbc:kingbase8://10.10.207.203:54321/cetc_jpaas?sys_catalog&useSSL=false&lowerCaseTableNames=true&autoReconnect=true
+    username: cetc_viewer
+    password: Password01
+    schema: jpaas_system
+    table: sys_log_ywzt
+  login:
+    url: jdbc:kingbase8://10.10.207.203:54321/cetc_jpaas?sys_catalog&useSSL=false&lowerCaseTableNames=true&autoReconnect=true
+    username: cetc_viewer
+    password: Password01
+    userSchema: jpaas_user
+    systemSchema: jpaas_system
+    userTable: os_user_view
+    userRelationTable: os_rel_inst_view
+    userGroupTable: os_group_view
+    groupMenuTable: os_group_menu_view
